@@ -5,12 +5,13 @@ require 'mechanize'
 class PollenReport
   BASE_URL = "http://www.wunderground.com/DisplayPollen.asp?Zipcode="
 
-  def initialize
+  def initialize(zipcode)
     @agent = Mechanize.new
+    @zipcode = zipcode
   end
 
-  def lookup(zipcode)
-    page = @agent.get(BASE_URL + zipcode)
+  def lookup
+    page = @agent.get(BASE_URL + @zipcode)
     pollen_level = page.search(".dataTable td")[9]
     city_name = page.search("h1").text.gsub("Pollen Index for ", "")
 
@@ -28,8 +29,8 @@ get '/' do
 end
 
 get '/lookup/:zipcode' do
-  pollen_report = PollenReport.new
-  @lookup_report = pollen_report.lookup(params[:zipcode])
+  pollen_report = PollenReport.new(params[:zipcode])
+  @lookup_report = pollen_report.lookup
   '<h1>' + @lookup_report + '</h1>'
 end
 
