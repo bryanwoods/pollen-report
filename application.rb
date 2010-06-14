@@ -16,7 +16,7 @@ class PollenReport
     city_name = page.search("h1").text.gsub("Pollen Index for ", "")
 
     if pollen_level
-      "Current air quality for #{city_name}: " + pollen_level
+      "Current air quality in #{city_name}: " + pollen_level
     else
       "Sorry, couldn't find any air quality information for #{city_name}."
     end
