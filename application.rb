@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'haml'
 require 'mechanize'
 
 class PollenReport
@@ -31,6 +30,6 @@ end
 get '/lookup/:zipcode' do
   pollen_report = PollenReport.new
   @lookup_report = pollen_report.lookup(params[:zipcode])
-  haml '%h1= @lookup_report'
+  '<h1>' + @lookup_report + '</h1>'
 end
 
