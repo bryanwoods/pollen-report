@@ -5,9 +5,9 @@ require 'mechanize'
 class PollenReport
   BASE_URL = "http://www.wunderground.com/DisplayPollen.asp?Zipcode="
 
-  def initialize(zipcode)
-    @agent = Mechanize.new
+  def initialize(zipcode, agent = Mechanize.new)
     @zipcode = zipcode
+    @agent = agent
   end
 
   def lookup
